@@ -26,6 +26,12 @@ tests=(
 
 total=$(( ${#tests[@]} / 2 ))
 pass=0
+program_name="test_app"
+object_name="test_app.o"
+
+echo "Compiling code ..."
+
+nasm -felf64 main.asm -o $object_name && ld $object_name -o $program_name
 
 echo "🔍 Running $total tests..."
 
@@ -35,17 +41,18 @@ for ((i=0; i<${#tests[@]}; i+=2)); do
 
     echo -n "Test $((i/2+1)): \"$input\" ... "
 
-    echo -n "$input" | ./a.out >/dev/null 2>&1
+    echo -n "$input" | ./$program_name 2>/dev/null
     result=$?
 
     if [ "$result" -eq "$expected" ]; then
         echo -e "\033[1;32m✅ OK\033[0m"
         pass=$((pass+1))
     else
-        echo -e "\003[1;31m❌ FAIL\033[0m (expected $expected, actual $result)"
+        echo -e "\033[1;31m❌ FAIL\033[0m (expected $expected, actual $result)"
     fi
 done
 
 echo ""
-echo "📊 Test results: $pass / $total."
+echo -e "\033[1;35m📊 Test results: $pass / $total.\033[0m"
 
+rm $program_name $object_name

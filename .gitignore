@@ -1,2 +1,4 @@
 *.out
 *.o
+isbalanced
+test_app
