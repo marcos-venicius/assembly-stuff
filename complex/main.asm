@@ -34,6 +34,9 @@ _start:
   mov rbx, rax
   lea rdi, [buffer]
 
+  cmp rbx, 0x00
+  je _success
+
   cmp byte [rdi + rbx - 1], 0x0A  ; check if there is a new line at the end
   jne _no_newline
   dec rbx                         ; ignore newline
