@@ -6,6 +6,7 @@ It's just a room to push things I'm playing in assembly.
 
 1. [basic and 'wrongly implemented parenthesis match checking](./basic-check-parens/)
 2. [complete parenthesis match checking using stack](./complete-check-parens/)
+2. [simple example on how to use a C external function inside assembly code](./hacking-nasa/)
 
 
 > [!WARNING]
